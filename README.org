@@ -1,0 +1,15 @@
+* Clean audio files
+
+A small, throw-away project to clean unwanted snippets from an audio
+file. Wrapped nicely in a container and sugar coated with a justfile
+for easy operation.
+
+** Usage
+#+begin_src shell
+  # build the container
+  just build
+  # remove unwanted snippets from an audio file
+  just run audiofile.wav
+  # clean up the container
+  just clean
+#+end_src
