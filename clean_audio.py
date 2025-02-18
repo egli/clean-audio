@@ -16,6 +16,8 @@ full_audio, sr = librosa.load(full_audio_path, sr=None)
 music_sample_path = "unwanted.wav"
 music_sample, _ = librosa.load(music_sample_path, sr=sr)
 
+length = len(music_sample) * 1000 / sr
+
 # Calculate cross-correlation for similarity detection
 correlation = np.correlate(full_audio, music_sample, mode="valid")
 
@@ -28,8 +30,8 @@ audio_segment = AudioSegment.from_file(full_audio_path, format="wav")
 
 # Remove detected segments
 for start in reversed(matches):
-    start_ms = int(start / sr * 1000)
-    end_ms = start_ms + len(music_sample) * 1000 / sr
+    start_ms = int(start * 1000 / sr )
+    end_ms = start_ms + length
     audio_segment = audio_segment[:start_ms] + audio_segment[end_ms:]
 
 # Save cleaned audiobook
