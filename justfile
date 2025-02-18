@@ -1,6 +1,5 @@
 image_name := "audio-processing"
 tag := "latest"
-engine := "podman"  # or "docker"
 container_name := "audio-processing"
 
 [private]
@@ -9,15 +8,15 @@ default:
 
 # Build the container image
 build:
-    {{engine}} build -t {{image_name}}:{{tag}} .
+    podman build -t {{image_name}}:{{tag}} .
 
 # Remove unwanted snippets from an audiofile
 run audiofile:
-    {{engine}} run -it --name {{container_name}} --rm --volume $PWD:/app {{image_name}}:{{tag}} python3 clean_audio.py {{audiofile}}
+    podman run -it --name {{container_name}} --rm --volume $PWD:/app {{image_name}}:{{tag}} python3 clean_audio.py {{audiofile}}
 
 # Remove the container image
 clean:
-    {{engine}} rmi {{image_name}}:{{tag}}
+    podman rmi {{image_name}}:{{tag}}
 
 # Show configuration
 config:
