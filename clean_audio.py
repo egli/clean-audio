@@ -33,6 +33,7 @@ for start in reversed(matches):
     audio_segment = audio_segment[:start_ms] + audio_segment[end_ms:]
 
 # Save cleaned audiobook
-audio_segment.export("audiobook_cleaned.mp3", format="mp3")
+export_path = full_audio_path.replace(".wav", "_cleaned.wav")
+audio_segment.export(export_path, format="wav")
 
 print("Repeated music segments were removed!")
