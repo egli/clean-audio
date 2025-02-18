@@ -11,17 +11,13 @@ default:
 build:
     {{engine}} build -t {{image_name}}:{{tag}} .
 
-# Run the container interactively
-run audiobook:
-    {{engine}} run -it --name {{container_name}} --rm --volume $PWD:/app {{image_name}}:{{tag}} python3 clean_audio.py {{audiobook}}
+# Remove unwanted snippets from an audiofile
+run audiofile:
+    {{engine}} run -it --name {{container_name}} --rm --volume $PWD:/app {{image_name}}:{{tag}} python3 clean_audio.py {{audiofile}}
 
 # Remove the container image
 clean:
     {{engine}} rmi {{image_name}}:{{tag}}
-
-# Start a shell in a running container
-shell:
-    {{engine}} exec -it {{container_name}} bash
 
 # Show configuration
 config:
