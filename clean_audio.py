@@ -22,7 +22,7 @@ length = len(music_sample) * 1000 / sr
 correlation = np.correlate(full_audio, music_sample, mode="valid")
 
 # Set detection threshold (adjust experimentally)
-threshold = 0.6 * np.max(correlation)
+threshold = 0.99 * np.max(correlation)
 matches = np.where(correlation > threshold)[0]
 count = len(matches)
 
