@@ -24,6 +24,7 @@ correlation = np.correlate(full_audio, music_sample, mode="valid")
 # Set detection threshold (adjust experimentally)
 threshold = 0.6 * np.max(correlation)
 matches = np.where(correlation > threshold)[0]
+count = len(matches)
 
 # Load original audio with pydub for easier slicing
 audio_segment = AudioSegment.from_file(full_audio_path, format="wav")
@@ -38,4 +39,4 @@ for start in reversed(matches):
 export_path = full_audio_path.replace(".wav", "_cleaned.wav")
 audio_segment.export(export_path, format="wav")
 
-print("Repeated music segments were removed!")
+print(f"{count} segments were removed!")
