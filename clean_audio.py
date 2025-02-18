@@ -1,9 +1,15 @@
+import argparse
 import librosa
 import numpy as np
 from pydub import AudioSegment
 
+# Add argument parser
+parser = argparse.ArgumentParser(description='Clean a given audio file by removing unwanted segments')
+parser.add_argument('audio_file', type=str, help='Path to the audio file to be cleaned')
+args = parser.parse_args()
+
 # Load files
-full_audio_path = "audiobook.mp3"
+full_audio_path = args.audio_file
 full_audio, sr = librosa.load(full_audio_path, sr=None)
 
 # Load the sample that is to be removed
